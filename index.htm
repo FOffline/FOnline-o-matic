@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>FOnline-o-matic</title>
+  <style type="text/css">
+    body {
+      background: #121212;
+      color: #5DA046;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+    }
+
+    header h1 {
+      font-weight: bold;
+      font-style: italic;
+      text-align: center;
+      text-shadow: 0px 0px 10px #5DA046;
+      font-size: 3.5em;
+      margin-bottom: 30px;
+    }
+
+    section {
+      background: rgba(30, 30, 30, 0.9);
+      border: 2px solid #5DA046;
+      padding: 30px;
+      border-radius: 15px;
+      width: 700px;
+      text-align: center;
+      box-shadow: 0px 0px 20px rgba(0, 255, 0, 0.1);
+    }
+
+    #faction_text {
+      background: #000000;
+      border: 1px solid #5DA046;
+      border-radius: 5px;
+      color: #00FF00;
+      font-family: 'Courier New', Courier, monospace;
+      /* Adjusted font-size here */
+      font-size: 1.5em; 
+      width: 90%;
+      padding: 15px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    #generate_button {
+      /* Adjusted font-size here */
+      font-size: 1.4em;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      color: #000;
+      background-color: #5DA046;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.3);
+    }
+
+    #generate_button:hover {
+      background-color: #00FF00;
+      box-shadow: 0px 0px 25px rgba(0, 255, 0, 0.6);
+    }
+
+    .data-lists {
+      display: none;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function generateFaction() {
+      var list = document.getElementById("Names");
+      var randomName = list.options[Math.floor(Math.random() * list.options.length)].text;
+
+      document.getElementById("faction_text").value = "FOnline: " + randomName;
+    }
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>FOnline-o-matic</h1>
+  </header>
+
+  <section>
+    <input id="faction_text" type="text" readonly placeholder="TERMINAL READY">
+    <p>
+      <button id="generate_button" type="button" onclick="generateFaction()">GENERATE</button>
+    </p>
+  </section>
+
+  <div class="data-lists">
+    <select id="Names">
+      <option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
+      <option>2248</option><option>2268</option><option>2278</option><option>2288</option><option>2298</option>
+      <option>TLA Mk3</option>
+      <option>Heart of the Swarm</option><option>Mutant Terror</option><option>Vault 69</option><option>Loot Fever</option>
+      <option>Ashes of San Francisco</option><option>Definitive Edition</option><option>Aftermath</option><option>Evolved</option>
+      <option>Genesis</option><option>Wasteland Warfare</option><option>Call of the Vault</option><option>Shadow of the Enclave</option>
+      <option>Anarchy</option><option>Return of the Chosen One</option><option>Reborn</option><option>Revolution</option>
+      <option>New Beginnings</option><option>Loot Heaven</option><option>Warzone</option><option>Scorched Earth</option>
+	  <option>Last Hope</option><option>Shoot & Loot</option><option>Torment</option><option>Wild West</option>
+	  <option>True Wasteland</option><option>2238 Redux</option><option>Desert Warfare</option><option>Raiderland</option>
+	  <option>Harsh Wasteland</option><option>Age of Warlords</option><option>Project Mayhem</option><option>Desolation</option>
+    </select>
+  </div>
+
+</body>
+</html>

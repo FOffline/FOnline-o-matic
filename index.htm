@@ -3,71 +3,149 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <title>FOnline-o-matic</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
   <style type="text/css">
+    :root {
+      /* Slime Green Palette - Darker & Softer */
+      --pip-green: #2ecc71;      /* Softer Phosphor Green */
+      --pip-green-dim: #051a05;  /* Deep dark green for backgrounds */
+      --pip-green-glow: rgba(46, 204, 113, 0.2);
+      --pip-bg: #020804;         /* Very dark green-black */
+    }
+
     body {
-      background: #121212;
-      color: #5DA046;
-      font-family: 'Courier New', Courier, monospace;
+      background-color: var(--pip-bg);
+      color: var(--pip-green);
+      font-family: 'Share Tech Mono', monospace;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-top: 50px;
+      overflow: hidden;
+      margin: 0;
+      height: 100vh;
+    }
+
+    /* CRT Overlay Layer */
+    body::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      z-index: 2;
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+    }
+
+    /* Subtle Scanline Animation */
+    body::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: rgba(18, 16, 16, 0.03);
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+      animation: flicker 0.15s infinite;
     }
 
     header h1 {
       font-weight: bold;
-      font-style: italic;
+      text-transform: uppercase;
       text-align: center;
-      text-shadow: 0px 0px 10px #5DA046;
-      font-size: 3.5em;
-      margin-bottom: 30px;
+      text-shadow: 0 0 5px var(--pip-green);
+      font-size: 3em;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+      opacity: 0.9;
     }
 
     section {
-      background: rgba(30, 30, 30, 0.9);
-      border: 2px solid #5DA046;
-      padding: 30px;
-      border-radius: 15px;
+      background: var(--pip-green-dim);
+      border: 2px solid var(--pip-green);
+      padding: 40px;
+      border-radius: 4px;
       width: 700px;
       text-align: center;
-      box-shadow: 0px 0px 20px rgba(0, 255, 0, 0.1);
+      box-shadow: inset 0 0 30px #000, 0 0 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
+      /* Subtle breathing animation instead of harsh flicker */
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.95; }
+      50% { opacity: 1; }
     }
 
     #faction_text {
-      background: #000000;
-      border: 1px solid #5DA046;
-      border-radius: 5px;
-      color: #00FF00;
-      font-family: 'Courier New', Courier, monospace;
-      /* Adjusted font-size here */
-      font-size: 1.5em; 
+      background: #000500;
+      border: 1px solid var(--pip-green);
+      color: var(--pip-green);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.8em; 
       width: 90%;
       padding: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       text-align: center;
+      text-transform: uppercase;
+      outline: none;
+      box-shadow: inset 0 0 15px #000;
+      text-shadow: 0 0 8px var(--pip-green);
     }
 
     #generate_button {
-      /* Adjusted font-size here */
-      font-size: 1.4em;
-      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.3em;
+      font-family: 'Share Tech Mono', monospace;
       font-weight: bold;
       color: #000;
-      background-color: #5DA046;
+      background-color: var(--pip-green);
       border: none;
-      padding: 15px 40px;
-      border-radius: 10px;
+      padding: 12px 50px;
       cursor: pointer;
-      box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.3);
+      text-transform: uppercase;
+      transition: all 0.2s;
+      opacity: 0.85;
     }
 
     #generate_button:hover {
-      background-color: #00FF00;
-      box-shadow: 0px 0px 25px rgba(0, 255, 0, 0.6);
+      opacity: 1;
+      box-shadow: 0 0 20px var(--pip-green);
+      transform: translateY(-1px);
+    }
+
+    #generate_button:active {
+      transform: translateY(1px);
     }
 
     .data-lists {
       display: none;
+    }
+
+    /* Moving scanline bar */
+    .scanline {
+      width: 100%;
+      height: 100px;
+      z-index: 3;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(46, 204, 113, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+      opacity: 0.1;
+      position: absolute;
+      bottom: 100%;
+      animation: scanline 8s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% { bottom: 100%; }
+      80% { bottom: 100%; }
+      100% { bottom: -100px; }
     }
   </style>
 
@@ -75,21 +153,22 @@
     function generateFaction() {
       var list = document.getElementById("Names");
       var randomName = list.options[Math.floor(Math.random() * list.options.length)].text;
-
       document.getElementById("faction_text").value = "FOnline: " + randomName;
     }
   </script>
 </head>
 <body>
 
+  <div class="scanline"></div>
+
   <header>
     <h1>FOnline-o-matic</h1>
   </header>
 
   <section>
-    <input id="faction_text" type="text" readonly placeholder="TERMINAL READY">
+    <input id="faction_text" type="text" readonly placeholder="TERMINAL READY...">
     <p>
-      <button id="generate_button" type="button" onclick="generateFaction()">GENERATE</button>
+      <button id="generate_button" type="button" onclick="generateFaction()">[ GENERATE ]</button>
     </p>
   </section>
 
@@ -103,9 +182,10 @@
       <option>Genesis</option><option>Wasteland Warfare</option><option>Call of the Vault</option><option>Shadow of the Enclave</option>
       <option>Anarchy</option><option>Return of the Chosen One</option><option>Reborn</option><option>Revolution</option>
       <option>New Beginnings</option><option>Loot Heaven</option><option>Warzone</option><option>Scorched Earth</option>
-	  <option>Last Hope</option><option>Shoot & Loot</option><option>Torment</option><option>Wild West</option>
-	  <option>True Wasteland</option><option>2238 Redux</option><option>Desert Warfare</option><option>Raiderland</option>
-	  <option>Harsh Wasteland</option><option>Age of Warlords</option><option>Project Mayhem</option><option>Desolation</option>
+      <option>Last Hope</option><option>Shoot & Loot</option><option>Torment</option><option>Wild West</option>
+      <option>True Wasteland</option><option>2238 Redux</option><option>Desert Warfare</option><option>Raiderland</option>
+      <option>Harsh Wasteland</option><option>Age of Warlords</option><option>Project Mayhem</option><option>Desolation</option><option>Cheekie Breekie</option><option>Desolated California</option><option>Revival</option><option>Banditland</option>
+      <option>Wasteland Conquest</option><option>Aftertimes Mk2</option><option>New Hope</option><option>Another Reloaded clone</option>
     </select>
   </div>
 

@@ -7,14 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 
   <style type="text/css">
     :root {
-      /* Slime Green Palette - Darker & Softer */
-      --pip-green: #2ecc71;      /* Softer Phosphor Green */
-      --pip-green-dim: #051a05;  /* Deep dark green for backgrounds */
+      --pip-green: #2ecc71;
+      --pip-green-dim: #051a05;
       --pip-green-glow: rgba(46, 204, 113, 0.2);
-      --pip-bg: #020804;         /* Very dark green-black */
+      --pip-bg: #020804;
     }
 
     body {
@@ -30,29 +30,26 @@
       height: 100vh;
     }
 
-    /* CRT Overlay Layer */
     body::before {
       content: " ";
-      display: block;
       position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                  linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-      z-index: 2;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.1) 50%),
+        linear-gradient(90deg, rgba(255,0,0,0.02), rgba(0,255,0,0.01), rgba(0,0,255,0.02));
       background-size: 100% 2px, 3px 100%;
       pointer-events: none;
+      z-index: 2;
     }
 
-    /* Subtle Scanline Animation */
     body::after {
       content: " ";
-      display: block;
       position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(18, 16, 16, 0.03);
       opacity: 0;
-      z-index: 2;
       pointer-events: none;
+      z-index: 2;
       animation: flicker 0.15s infinite;
     }
 
@@ -62,9 +59,19 @@
       text-align: center;
       text-shadow: 0 0 5px var(--pip-green);
       font-size: 3em;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       letter-spacing: 4px;
       opacity: 0.9;
+    }
+
+    header .subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.9em;
+      color: var(--pip-green);
+      opacity: 0.75;
+      text-shadow: 0 0 4px var(--pip-green);
+      margin-bottom: 25px;
+      text-align: center;
     }
 
     section {
@@ -74,10 +81,9 @@
       border-radius: 4px;
       width: 700px;
       text-align: center;
-      box-shadow: inset 0 0 30px #000, 0 0 10px rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 0 30px #000, 0 0 10px rgba(0,0,0,0.5);
       position: relative;
       z-index: 1;
-      /* Subtle breathing animation instead of harsh flicker */
       animation: breathe 4s ease-in-out infinite;
     }
 
@@ -91,7 +97,7 @@
       border: 1px solid var(--pip-green);
       color: var(--pip-green);
       font-family: 'Share Tech Mono', monospace;
-      font-size: 1.8em; 
+      font-size: 1.8em;
       width: 90%;
       padding: 15px;
       margin-bottom: 30px;
@@ -130,15 +136,19 @@
       display: none;
     }
 
-    /* Moving scanline bar */
     .scanline {
       width: 100%;
       height: 100px;
-      z-index: 3;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(46, 204, 113, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
-      opacity: 0.1;
       position: absolute;
       bottom: 100%;
+      background: linear-gradient(
+        0deg,
+        rgba(0,0,0,0) 0%,
+        rgba(46,204,113,0.05) 50%,
+        rgba(0,0,0,0) 100%
+      );
+      opacity: 0.1;
+      z-index: 3;
       animation: scanline 8s linear infinite;
     }
 
@@ -157,12 +167,16 @@
     }
   </script>
 </head>
+
 <body>
 
   <div class="scanline"></div>
 
   <header>
     <h1>FOnline-o-matic</h1>
+    <div class="subtitle">
+      The only place to get a cool name for your own FOnline with blackjack and hookers!
+    </div>
   </header>
 
   <section>
@@ -184,13 +198,14 @@
       <option>New Beginnings</option><option>Loot Heaven</option><option>Warzone</option><option>Scorched Earth</option>
       <option>Last Hope</option><option>Shoot & Loot</option><option>Torment</option><option>Wild West</option>
       <option>True Wasteland</option><option>2238 Redux</option><option>Desert Warfare</option><option>Raiderland</option>
-      <option>Harsh Wasteland</option><option>Age of Warlords</option><option>Project Mayhem</option><option>Desolation</option><option>Cheekie Breekie</option><option>Desolated California</option><option>Revival</option><option>Banditland</option>
-      <option>Wasteland Conquest</option><option>Aftertimes Mk2</option><option>New Hope</option><option>Another Reloaded clone</option><option>Hardcore</option><option>Wasteland Tycoon</option><option>Total War</option><option>No Man's Land</option>
-	  <option>Dead Ground</option><option>Afterworld</option><option>Endless Dust</option><option>New Horizon</option>
-	  <option>The Master's Legacy</option><option>Endless Warfare</option>
+      <option>Harsh Wasteland</option><option>Age of Warlords</option><option>Project Mayhem</option><option>Desolation</option>
+      <option>Cheekie Breekie</option><option>Desolated California</option><option>Revival</option><option>Banditland</option>
+      <option>Wasteland Conquest</option><option>Aftertimes Mk2</option><option>New Hope</option>
+      <option>Another Reloaded Clone</option><option>Hardcore</option><option>Wasteland Tycoon</option><option>Total War</option>
+      <option>No Man's Land</option><option>Dead Ground</option><option>Afterworld</option><option>Endless Dust</option>
+      <option>New Horizon</option><option>The Master's Legacy</option><option>Endless Warfare</option><option>Ground Zero</option><option>Doomsday</option><option>The Ghoul's Tale</option><option>Supreme</option><option>New Generation</option><option>Thunderdome</option><option>Blood & Rust</option><option>New World</option><option>Old World Blues</option>
     </select>
   </div>
 
 </body>
 </html>
-
